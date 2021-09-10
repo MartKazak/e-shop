@@ -27,3 +27,9 @@ function App() {
 }
 
 export default App;
+
+//https://app.pluralsight.com/guides/hierarchy-of-components-and-how-to-get-async-data
+//https://www.digitalocean.com/community/tutorials/how-to-handle-async-data-loading-lazy-loading-and-code-splitting-with-react
+//https://www.robinwieruch.de/react-folder-structure
+//https://dev.to/larswaechter/how-i-structure-my-react-projects-jii
+//https://www.carlrippon.com/fetch-with-async-await-and-typescript/
