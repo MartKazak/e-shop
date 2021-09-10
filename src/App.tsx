@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Products from "./domain/Products";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
             </div>
         </header>
         <main>
-
+            <Products />
         </main>
         <footer>
             <p>e-shop 2021</p>
