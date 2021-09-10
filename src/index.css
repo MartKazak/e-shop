@@ -1,0 +1,187 @@
+@import "reset.css";
+body {
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+header {
+    background: #8cc152;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    position: sticky;
+    top: 0;
+    /* hack to overlay slider and slider arrows which has z-index as 20 */
+    z-index: 21;
+}
+
+.logo {
+    margin: 0 10px;
+}
+
+.navigation-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+}
+
+.navigation-item {
+    margin: 0 10px;
+}
+
+.navigation-item a {
+    text-decoration: none;
+    color: #000000;
+}
+
+main {
+    font-size: 16px;
+    padding: 0 2em;
+}
+
+.items-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    grid-gap: 1rem;
+    margin-bottom: 1rem;;
+    /* padding: 20px; */
+    /* margin: 20px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; */
+    /* https://dev.to/stel/a-little-trick-to-left-align-items-in-last-row-with-flexbox-230l */
+}
+
+.item {
+    width: 100px;
+    height: 150px;
+}
+
+.card {
+    /* width: 18rem; */
+    background-color: #E6E9ED;
+    border-radius: 4px;
+    padding: 5px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 40%);
+}
+
+.card-image > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.card-body {
+    margin: 10px 10px;
+}
+
+/*maybe flex is not needed there*/
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: #8cc152;
+}
+
+.add-product-container {
+    margin: 0.5rem 0 0.5rem 0;
+    padding: 0.5rem;
+    background-color: #A0D468;
+    border-radius: 4px;
+}
+
+.product-form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 1rem;
+
+    margin: 1rem;
+    width: 80%;
+}
+
+.product-form label {
+    text-align: right;
+    grid-column: 1;
+}
+
+.product-form input,
+.product-form textarea {
+    grid-column: 2;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.form-control {
+    padding: 0.4rem 0.7rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.form-control:focus {
+    border: 1px solid #4FC1E9 !important;
+    outline: none;
+}
+
+.btn {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 0.3rem 0.8rem;
+    margin-right: 0.6rem;
+}
+
+.btn-default {
+    color: #434a54;
+    background-color: #F5F7FA;
+    border-color: #AAB2BD;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active {
+    color: #F5F7FA;
+    background-color: #CCD1D9;
+    border-color: #AAB2BD;
+}
+
+.btn-primary {
+    background-color: #3BAFDA;
+    border-color: #3BAFDA;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #4FC1E9;
+    border-color: #4FC1E9;
+}
+
+.btn-danger {
+    color: #F5F7FA;
+    background-color: #DA4453;
+    border-color: #DA4453;
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active {
+    color: #F5F7FA;
+    background-color: #ED5565;
+    border-color: #ED5565;
+}
+
+#product-delete-confimation {
+    padding-top: 1rem;
+}
