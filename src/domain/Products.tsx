@@ -5,8 +5,15 @@ export default function Products() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        new ProductsService().getProducts()
-            .then(data => setProducts(data));
+        async function fetchData() {
+            try {
+                const data = await new ProductsService().getProducts();
+                setProducts(data);
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        fetchData();
     }, []);
 
     return (
