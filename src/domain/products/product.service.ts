@@ -15,3 +15,7 @@ const productsUrl = `${BASE_API_URL}products/`;
 export function getProducts(): Promise<IProduct[]> {
     return httpClient.get<IProduct[]>(productsUrl);
 }
+
+export function deleteProduct(id: number): Promise<void> {
+    return httpClient.xdelete(`${productsUrl}${id}`);
+}

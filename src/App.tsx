@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import Products from "./domain/Products";
+import Slider from './components/slider/slider';
+import ProductList from './domain/products/productList';
 
 function App() {
   return (
@@ -17,7 +18,11 @@ function App() {
             </div>
         </header>
         <main>
-            <Products />
+            <Slider />
+            <div className="add-product-container">
+                <button id="btn-add-product" className="btn btn-default" type="button">+ Add product</button>
+            </div>
+            <ProductList />
         </main>
         <footer>
             <p>e-shop 2021</p>
@@ -33,3 +38,4 @@ export default App;
 //https://www.robinwieruch.de/react-folder-structure
 //https://dev.to/larswaechter/how-i-structure-my-react-projects-jii
 //https://www.carlrippon.com/fetch-with-async-await-and-typescript/
+//https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example/
