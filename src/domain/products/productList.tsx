@@ -11,7 +11,7 @@ export default function ProductList() {
             try {
                 const data: IProduct[] = await getProducts();
                 const products = data.map(p => new ProductModel(p.id, p.title, p.description, p.price, p.imgUrl, p.showInSlider));
-
+console.log(products);
                 setProducts(products);
             } catch (e) {
                 console.error(e);
