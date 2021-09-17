@@ -1,4 +1,4 @@
-import { DEFAULT_IMG_URL } from "../../config";
+import { DEFAULT_IMG_URL } from "../../infrastructure/config";
 
 export class ProductModel {
     id: number;

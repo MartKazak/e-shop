@@ -32,5 +32,5 @@ console.log(products);
                 <ProductCard key={product.id} product={product} onDeleteCallback={deleteProduct}/>
             ))}
         </div>
-    )
+    );
 }

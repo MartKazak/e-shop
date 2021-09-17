@@ -5,37 +5,41 @@ import Slider from './components/slider/slider';
 import ProductList from './domain/products/productList';
 
 function App() {
-    const [isOpen, setIsOpen] = useState(false);
-  return (
-    <div className="App">
-        <header>
-            <div className="logo">
-                <h3>LOGO</h3>
-            </div>
-            <div>
-                <ul className="navigation-list">
-                    <li className="navigation-item">Search</li>
-                    <li className="navigation-item">Login</li>
-                </ul>
-            </div>
-        </header>
-        <main>
-            <Slider />
-            <div className="add-product-container">
-                <button id="btn-add-product" className="btn btn-default" type="button">+ Add product</button>
-            </div>
-            <ProductList />
-            <button id="btn-add-product" className="btn btn-default" type="button" onClick={() => setIsOpen(!isOpen)}>+ Add product</button>
+    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
-            <Modal title={"title"} isOpen={isOpen}>
-                <p>Content gos here</p>
-            </Modal>
-        </main>
-        <footer>
-            <p>e-shop 2021</p>
-        </footer>
-    </div>
-  );
+    const openModal = () => setIsOpenModal(!isOpenModal);
+
+    return (
+        <div className="App">
+            <header>
+                <div className="logo">
+                    <h3>LOGO</h3>
+                </div>
+                <div>
+                    <ul className="navigation-list">
+                        <li className="navigation-item">Search</li>
+                        <li className="navigation-item">Login</li>
+                    </ul>
+                </div>
+            </header>
+            <main>
+                <button  onClick={() => openModal()}> show Modal </button>
+
+                <Modal isOpen={isOpenModal}>
+                    Modal content
+                </Modal>
+
+                <Slider />
+                <div className="add-product-container">
+                    <button id="btn-add-product" className="btn btn-default" type="button">+ Add product</button>
+                </div>
+                <ProductList />
+            </main>
+            <footer>
+                <p>e-shop 2021</p>
+            </footer>
+        </div>
+    );
 }
 
 export default App;
@@ -48,3 +52,4 @@ export default App;
 //https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example/
 //https://nainacodes.com/blog/create-an-accessible-and-reusable-react-modal
 //https://stackoverflow.com/questions/62538217/reusable-modal-component-react-typescript
+//https://medium.com/risan/react-component-with-dot-notation-7a9853dbf33b
