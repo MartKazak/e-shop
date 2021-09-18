@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "../../components/modal/modal";
 import { ProductModel } from "./product.model";
+import ProductForm from "./productForm";
 
 type Props = {
     product: ProductModel;
@@ -8,8 +9,11 @@ type Props = {
 };
 
 export default function ProductCard({ product, onDeleteCallback }: Props) {
-    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-    const toggleModalVisibility = () => setIsOpenModal(!isOpenModal);
+    const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
+    const toggleDeleteModalVisibility = () => setIsOpenDeleteModal(!isOpenDeleteModal);
+
+    const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false);
+    const toggleEditModalVisibility = () => setIsOpenEditModal(!isOpenEditModal);
 
     return (
         <div className="card">
@@ -24,15 +28,23 @@ export default function ProductCard({ product, onDeleteCallback }: Props) {
                 <p className="card-price">{product.price}</p>
             </div>
             <div className="card-footer">
-                <button id="btn-update-product" className="btn btn-primary" type="button">Edit</button>
-                <button id="btn-delete-product" className="btn btn-danger" type="button" onClick={toggleModalVisibility}>Delete</button>
+                <button id="btn-update-product" className="btn btn-primary" type="button" onClick={toggleEditModalVisibility}>Edit</button>
+                <button id="btn-delete-product" className="btn btn-danger" type="button" onClick={toggleDeleteModalVisibility}>Delete</button>
             </div>
             <Modal
                 title={"Delete product"}
-                isOpen={isOpenModal}
+                isOpen={isOpenDeleteModal}
                 onConfirm={async () => await onDeleteCallback(product.id)}
-                onCancel={toggleModalVisibility}>
+                onCancel={toggleDeleteModalVisibility}>
                 Do you really want to delete product: {product.title} ?
+            </Modal>
+            <Modal
+                title={"Edit product"}
+                isOpen={isOpenEditModal}
+                onConfirm={toggleEditModalVisibility}
+                onCancel={toggleEditModalVisibility}>
+                Edit product: {product.title} ?
+                <ProductForm product={product} />
             </Modal>
         </div>
     );
