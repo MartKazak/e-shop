@@ -1,3 +1,5 @@
+import { useState } from "react";
+import Modal from "../../components/modal/modal";
 import { ProductModel } from "./product.model";
 
 type Props = {
@@ -6,14 +8,8 @@ type Props = {
 };
 
 export default function ProductCard({ product, onDeleteCallback }: Props) {
-    // const onDelete = async () => {
-    //     // const addProductModal = new SimpleModal("Remove product", null, null, null, `<div id="product-delete-confimation"></div>`);
-    //     // const modalResponse = await addProductModal.question();
-
-    //     // if (modalResponse) {
-    //     //     await onDeleteCallback(product.id);
-    //     // }
-    // };
+    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+    const toggleModalVisibility = () => setIsOpenModal(!isOpenModal);
 
     return (
         <div className="card">
@@ -29,8 +25,15 @@ export default function ProductCard({ product, onDeleteCallback }: Props) {
             </div>
             <div className="card-footer">
                 <button id="btn-update-product" className="btn btn-primary" type="button">Edit</button>
-                <button id="btn-delete-product" className="btn btn-danger" type="button" onClick={async () => onDeleteCallback(product.id)}>Delete</button>
+                <button id="btn-delete-product" className="btn btn-danger" type="button" onClick={toggleModalVisibility}>Delete</button>
             </div>
+            <Modal
+                title={"Delete product"}
+                isOpen={isOpenModal}
+                onConfirm={async () => await onDeleteCallback(product.id)}
+                onCancel={toggleModalVisibility}>
+                Do you really want to delete product: {product.title} ?
+            </Modal>
         </div>
     );
 }
