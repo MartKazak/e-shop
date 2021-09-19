@@ -16,6 +16,10 @@ export function getProducts(): Promise<IProduct[]> {
     return httpClient.get<IProduct[]>(productsUrl);
 }
 
+export function updateProduct(product: IProduct): Promise<IProduct> {
+    return httpClient.put(`${productsUrl}${product.id}`, product);
+}
+
 export function deleteProduct(id: number): Promise<void> {
     return httpClient.xdelete(`${productsUrl}${id}`);
 }

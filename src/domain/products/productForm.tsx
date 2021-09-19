@@ -1,39 +1,28 @@
-import { useForm } from "../../hooks/useForm";
 import { ProductModel } from "./product.model";
 
 type Props = {
     product: ProductModel;
+    onChangeValue: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
-export default function ProductForm({product}: Props) {
-    const { onChange, onSubmit, values } = useForm(
-        saveProductCallback,
-        product
-    );
-
-    async function saveProductCallback() {
-        console.log(values);
-    }
+export default function ProductForm({ product, onChangeValue }: Props) {
 
     return (
         <form id="add-product-form" className="product-form">
-            <input id="product-id" name="id" type="hidden" value="" />
-            <input id="product-show-in-slider" type="hidden" name="showInSlider" value="false" />
-
             <label>Price</label>
-            <input id="product-price" className="form-control" type="text" name="price"  onChange={onChange} />
+            <input id="product-price" className="form-control" type="text" name="price" value={product.price} onChange={onChangeValue} />
 
             <label>Title</label>
-            <input id="product-title" className="form-control" type="text" name="title"  onChange={onChange} />
+            <input id="product-title" className="form-control" type="text" name="title" value={product.title} onChange={onChangeValue} />
 
             <label>Description</label>
-            <textarea id="product-description" className="form-control" rows={4} name="description" value="" />
+            <textarea id="product-description" className="form-control" rows={4} name="description" value={product.description} onChange={e => onChangeValue(e)} />
 
             <label>Image url</label>
-            <input id="product-img-url" className="form-control" type="text" name="imgUrl" value="" />
+            <input id="product-img-url" className="form-control" type="text" name="imgUrl" value={product.imgUrl} onChange={onChangeValue} />
 
             <label>Show in slider</label>
-            <button id="btn-toggle-slider-option" className="btn btn-default" type="button">Add to slider</button>
+            <button id="btn-toggle-slider-option" className="btn btn-default" type="button"></button>
         </form>
     );
-};
+}

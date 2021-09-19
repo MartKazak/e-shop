@@ -6,14 +6,26 @@ import ProductForm from "./productForm";
 type Props = {
     product: ProductModel;
     onDeleteCallback: (id: number) => Promise<void>;
+    onUpdateCallback: (product: ProductModel) => Promise<void>;
 };
 
-export default function ProductCard({ product, onDeleteCallback }: Props) {
+export default function ProductCard({ product, onDeleteCallback, onUpdateCallback }: Props) {
+    const [productState, setProductState] = useState<ProductModel>(product);
+
     const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
     const toggleDeleteModalVisibility = () => setIsOpenDeleteModal(!isOpenDeleteModal);
 
     const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false);
     const toggleEditModalVisibility = () => setIsOpenEditModal(!isOpenEditModal);
+
+    const submitProductForm = async () => {
+        await onUpdateCallback(productState);
+        toggleEditModalVisibility();
+    };
+
+    const updateProduct = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        setProductState({ ...productState, [event.target.name]: event.target.value });
+    }
 
     return (
         <div className="card">
@@ -41,10 +53,10 @@ export default function ProductCard({ product, onDeleteCallback }: Props) {
             <Modal
                 title={"Edit product"}
                 isOpen={isOpenEditModal}
-                onConfirm={toggleEditModalVisibility}
+                onConfirm={submitProductForm}
                 onCancel={toggleEditModalVisibility}>
                 Edit product: {product.title} ?
-                <ProductForm product={product} />
+                <ProductForm product={productState} onChangeValue={updateProduct}/>
             </Modal>
         </div>
     );

@@ -6,26 +6,29 @@ class HttpClient {
     async get<T>(url: string): Promise<T> {
         const response: Response = await fetch(new Request(url));
         const json: T = await response.json();
+
         return json;
     }
 
-    async post<T>(url: string, data = {}): Promise<T> {
+    async post<T>(url: string, data?: T): Promise<T> {
         const params: RequestInit = {
             method: "POST",
             body: JSON.stringify(data)
         };
         const response: Response = await fetch(new Request(url, params));
         const json: T = await response.json();
+
         return json;
     };
 
-    async put<T>(url: string, data = {}): Promise<T> {
+    async put<T>(url: string, data?: T): Promise<T> {
         const params: RequestInit = {
             method: "PUT",
             body: JSON.stringify(data)
         };
         const response: Response = await fetch(new Request(url, params));
         const json: T = await response.json();
+
         return json;
     };
 
@@ -43,6 +46,7 @@ class HttpClient {
         };
         const response: HttpResponse<T> = await fetch(new Request(url, params));
         response.data = await response.json();
+
         return response;
     }
 }
