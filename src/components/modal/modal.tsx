@@ -1,5 +1,4 @@
 //https://blog.bitsrc.io/build-a-simple-modal-component-with-react-16decdc111a6
-
 import "./modal.css"
 
 type Props = {

@@ -1,5 +1,8 @@
-interface HttpResponse<T> extends Response {
-    data?: T;
+enum HttpMethod {
+    Get = "GET",
+    Post = "POST",
+    Put = "PUT",
+    Delete = "DELETE",
 }
 
 class HttpClient {
@@ -11,46 +14,27 @@ class HttpClient {
     }
 
     async post<T>(url: string, data?: T): Promise<T> {
-        const params: RequestInit = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        };
-        const response: Response = await fetch(new Request(url, params));
-        const json: T = await response.json();
-
-        return json;
+        return await this.request<T>(HttpMethod.Post, url, data);
     };
 
     async put<T>(url: string, data?: T): Promise<T> {
-        const params: RequestInit = {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        };
-        const response: Response = await fetch(new Request(url, params));
-        const json: T = await response.json();
-
-        return json;
+        return await this.request<T>(HttpMethod.Put, url, data);
     };
 
     async xdelete(url: string): Promise<void> {
-        const params: RequestInit = {
-            method: "DELETE"
-        };
-        await fetch(new Request(url, params));
+        await this.request<void>(HttpMethod.Delete, url);
     };
 
-    async request<T>(url: string, method: string, data: any = {}): Promise<HttpResponse<T>> {
+    private async request<T>(method: HttpMethod, url: string, data?: T) {
         const params: RequestInit = {
             method: method,
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         };
-        const response: HttpResponse<T> = await fetch(new Request(url, params));
-        response.data = await response.json();
+        const response: Response = await fetch(new Request(url, params));
+        const json: T = await response.json();
 
-        return response;
+        return json;
     }
 }
 

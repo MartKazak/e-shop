@@ -32,7 +32,11 @@ export default function Slider({ slides }: Props) {
             ))}
             <div className="dots">
                 {slides.map((_, i) => (
-                    <button key={`dot-${i}`} className={"dots-dot " + (i === currentSlideIndex ? "dots-dot-active" : "")} onClick={() => setCurrentSlideIndex(i)}></button>
+                    <button
+                        key={`dot-${i}`}
+                        className={"dots-dot " + (i === currentSlideIndex ? "dots-dot-active" : "")}
+                        onClick={() => setCurrentSlideIndex(i)}>
+                    </button>
                 ))}
             </div>
             <button className="slider-btn slider-btn-left" onClick={() => previousSlide()}>&larr;</button>

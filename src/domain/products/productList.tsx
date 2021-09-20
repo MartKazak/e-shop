@@ -2,22 +2,25 @@ import { useState, useEffect } from "react";
 import Modal from "../../components/modal/modal";
 import Slider from "../../components/slider/slider";
 import { ProductModel } from "./product.model";
-import { createProduct, getProducts, IProduct, updateProduct } from "./product.service";
+import { createProduct, deleteProduct, getProducts, IProduct, updateProduct } from "./product.service";
 import ProductCard from "./productCard";
 import ProductForm from "./productForm";
 
 export default function ProductList() {
     const [products, setProducts] = useState<ProductModel[]>([]);
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+    const initialNewProductState = new ProductModel(0, "", "", 0, "", false);
+    const [newProduct, setNewProduct] = useState<ProductModel>(initialNewProductState);
 
-    const [newProduct, setNewProduct] = useState<ProductModel>(new ProductModel(100, "", "", 0, "", false));
-
-    const toggleModalVisibility = () => setIsOpenModal(!isOpenModal);
+    const toggleModalVisibility = (): void => {
+        setIsOpenModal(!isOpenModal);
+        setNewProduct(initialNewProductState);
+    };
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchData(): Promise<void> {
             try {
-                const data: IProduct[] = await getProducts();
+                const data = await getProducts();
                 const products = data.map(p => new ProductModel(p.id, p.title, p.description, p.price, p.imgUrl, p.showInSlider));
                 setProducts(products);
             } catch (e) {
@@ -27,13 +30,13 @@ export default function ProductList() {
         fetchData();
     }, []);
 
-    const deleteProduct = async (id: number) => {
+    const deleteProductCallback = async (id: number) => {
+        await deleteProduct(id);
         const filteredProducts = products.filter(p => p.id !== id);
-        //await deleteProduct(id);
         setProducts(filteredProducts);
     };
 
-    const updateProductCallback = async (product: ProductModel) => {
+    const updateProductCallback = async (product: ProductModel): Promise<void> => {
         await updateProduct({
             id: product.id,
             title: product.title,
@@ -57,19 +60,20 @@ export default function ProductList() {
             return p;
         });
 
-
         setProducts(updatedProducts);
     }
 
-    const createProductCallback = async () => {
-        await createProduct({
-            // id: newProduct.id,
+    const createProductCallback = async (): Promise<void> => {
+        const result = await createProduct({
             title: newProduct.title,
             description: newProduct.description,
             price: newProduct.price,
             imgUrl: newProduct.imgUrl,
             showInSlider: newProduct.showInSlider
         } as IProduct);
+
+        newProduct.id = result.id;
+
         products.unshift(newProduct)
         setProducts(products);
         toggleModalVisibility();
@@ -94,7 +98,7 @@ export default function ProductList() {
         </Modal>
         <div className="items-container">
             {products.map(product => (
-                <ProductCard key={product.id} product={product} onDeleteCallback={deleteProduct} onUpdateCallback={updateProductCallback}/>
+                <ProductCard key={product.id} product={product} onDeleteCallback={deleteProductCallback} onUpdateCallback={updateProductCallback}/>
             ))}
         </div>
         </>
