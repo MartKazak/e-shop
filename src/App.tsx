@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
 import './App.css';
-import Modal from "./components/modal/modal";
 import Slider from './components/slider/slider';
 import ProductList from './domain/products/productList';
 
 function App() {
-    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-
-    const toggleModalVisibility = () => setIsOpenModal(!isOpenModal);
-
     return (
         <div className="App">
             <header>
@@ -24,17 +18,7 @@ function App() {
             </header>
             <main>
                 <Slider />
-                <div className="add-product-container">
-                    <button id="btn-add-product" className="btn btn-default" type="button" onClick={() => toggleModalVisibility()}>+ Add product</button>
-                </div>
                 <ProductList />
-                <Modal
-                    title={"Add product"}
-                    isOpen={isOpenModal}
-                    onConfirm={toggleModalVisibility}
-                    onCancel={toggleModalVisibility}>
-                    Modal content
-                </Modal>
             </main>
             <footer>
                 <p>e-shop 2021</p>
