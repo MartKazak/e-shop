@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Modal from "../../components/modal/modal";
+import Slider from "../../components/slider/slider";
 import { ProductModel } from "./product.model";
 import { createProduct, getProducts, IProduct, updateProduct } from "./product.service";
 import ProductCard from "./productCard";
@@ -80,6 +81,7 @@ export default function ProductList() {
 
     return (
         <>
+        <Slider slides={products.filter(p => p.showInSlider)}/>
         <div className="add-product-container">
             <button id="btn-add-product" className="btn btn-default" type="button" onClick={() => toggleModalVisibility()}>+ Add product</button>
         </div>

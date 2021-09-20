@@ -2,34 +2,11 @@ import "./slider.css";
 import { useState } from "react";
 import { ProductModel } from "../../domain/products/product.model";
 
-export default function Slider() {
-     const slides: ProductModel[] = [
-        {
-            description: "description updated",
-            id: 1,
-            imgUrl: "https://images.pexels.com/photos/2138922/pexels-photo-2138922.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-            price: 100,
-            showInSlider: true,
-            title: "Product 1456",
-        },
-        {
-            description: "Product 2 description",
-            id: 2,
-            imgUrl: "https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-            price: 200,
-            showInSlider: true,
-            title: "Product 2"
-        },
-        {
-            description: "Product 3 description",
-            id: 3,
-            imgUrl: "https://images.pexels.com/photos/2177482/pexels-photo-2177482.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-            price: 300,
-            showInSlider: true,
-            title: "Product 3"
-        }
-    ];
+type Props = {
+    slides: ProductModel[];
+};
 
+export default function Slider({ slides }: Props) {
     const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
     const slidesAmount = slides.length;
 

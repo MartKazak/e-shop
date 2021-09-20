@@ -1,5 +1,4 @@
 import './App.css';
-import Slider from './components/slider/slider';
 import ProductList from './domain/products/productList';
 
 function App() {
@@ -17,7 +16,6 @@ function App() {
                 </div>
             </header>
             <main>
-                <Slider />
                 <ProductList />
             </main>
             <footer>
