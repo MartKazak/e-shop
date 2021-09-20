@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
+import Modal from "../../components/modal/modal";
 import { ProductModel } from "./product.model";
 import { getProducts, IProduct, updateProduct } from "./product.service";
 import ProductCard from "./productCard";
+import ProductForm from "./productForm";
 
 export default function ProductList() {
     const [products, setProducts] = useState<ProductModel[]>([]);
+    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+
+    const [newProduct, setNewProduct] = useState<ProductModel>(new ProductModel(100, "", "", 0, "", false));
+
+    const toggleModalVisibility = () => setIsOpenModal(!isOpenModal);
 
     useEffect(() => {
         async function fetchData() {
@@ -49,14 +56,37 @@ export default function ProductList() {
             return p;
         });
 
+
         setProducts(updatedProducts);
     }
 
+    const createProductCallback = async () => {
+        products.unshift(newProduct)
+        setProducts(products);
+        toggleModalVisibility();
+    }
+
+    const onChangeNewProduct = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        setNewProduct({ ...newProduct, [event.target.name]: event.target.value });
+    }
+
     return (
+        <>
+        <div className="add-product-container">
+            <button id="btn-add-product" className="btn btn-default" type="button" onClick={() => toggleModalVisibility()}>+ Add product</button>
+        </div>
+        <Modal
+            title={"Add product"}
+            isOpen={isOpenModal}
+            onConfirm={async () => await createProductCallback()}
+            onCancel={toggleModalVisibility}>
+            <ProductForm product={newProduct} onChangeValue={onChangeNewProduct}/>
+        </Modal>
         <div className="items-container">
             {products.map(product => (
                 <ProductCard key={product.id} product={product} onDeleteCallback={deleteProduct} onUpdateCallback={updateProductCallback}/>
             ))}
         </div>
+        </>
     );
 }
