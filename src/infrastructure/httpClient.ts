@@ -19,7 +19,6 @@ class HttpClient {
         const response: Response = await fetch(new Request(url, params));
         const json: T = await response.json();
 
-        debugger;
         return json;
     };
 
