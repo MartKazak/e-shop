@@ -1,15 +1,15 @@
-// import { FunctionComponent } from "react";
+//https://blog.bitsrc.io/build-a-simple-modal-component-with-react-16decdc111a6
+
 import "./modal.css"
 
 type Props = {
-    children: any;
     title: string;
     isOpen: boolean;
     onCancel: () => void;
     onConfirm: () => void;
 };
 
-export default function Modal({children, title, isOpen, onCancel, onConfirm}: Props) {
+const Modal: React.FC<Props> = ({ children, title, isOpen, onCancel, onConfirm }) => {
     if (!isOpen)
         return null;
 
@@ -32,4 +32,4 @@ export default function Modal({children, title, isOpen, onCancel, onConfirm}: Pr
     );
 }
 
-//https://blog.bitsrc.io/build-a-simple-modal-component-with-react-16decdc111a6
+export default Modal;
