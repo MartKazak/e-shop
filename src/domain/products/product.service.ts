@@ -16,6 +16,10 @@ export function getProducts(): Promise<IProduct[]> {
     return httpClient.get<IProduct[]>(productsUrl);
 }
 
+export function createProduct(product: IProduct): Promise<IProduct> {
+    return httpClient.post(`${productsUrl}`, product);
+}
+
 export function updateProduct(product: IProduct): Promise<IProduct> {
     return httpClient.put(`${productsUrl}${product.id}`, product);
 }

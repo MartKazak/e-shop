@@ -13,17 +13,20 @@ class HttpClient {
     async post<T>(url: string, data?: T): Promise<T> {
         const params: RequestInit = {
             method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         };
         const response: Response = await fetch(new Request(url, params));
         const json: T = await response.json();
 
+        debugger;
         return json;
     };
 
     async put<T>(url: string, data?: T): Promise<T> {
         const params: RequestInit = {
             method: "PUT",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         };
         const response: Response = await fetch(new Request(url, params));
@@ -42,6 +45,7 @@ class HttpClient {
     async request<T>(url: string, method: string, data: any = {}): Promise<HttpResponse<T>> {
         const params: RequestInit = {
             method: method,
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         };
         const response: HttpResponse<T> = await fetch(new Request(url, params));

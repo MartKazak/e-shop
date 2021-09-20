@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Modal from "../../components/modal/modal";
 import { ProductModel } from "./product.model";
-import { getProducts, IProduct, updateProduct } from "./product.service";
+import { createProduct, getProducts, IProduct, updateProduct } from "./product.service";
 import ProductCard from "./productCard";
 import ProductForm from "./productForm";
 
@@ -61,6 +61,14 @@ export default function ProductList() {
     }
 
     const createProductCallback = async () => {
+        await createProduct({
+            // id: newProduct.id,
+            title: newProduct.title,
+            description: newProduct.description,
+            price: newProduct.price,
+            imgUrl: newProduct.imgUrl,
+            showInSlider: newProduct.showInSlider
+        } as IProduct);
         products.unshift(newProduct)
         setProducts(products);
         toggleModalVisibility();

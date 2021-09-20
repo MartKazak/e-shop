@@ -2,8 +2,8 @@
   "products": [
     {
       "id": 1,
-      "title": "Product 1456",
-      "description": "description updated",
+      "title": "Product 1",
+      "description": "description 1",
       "price": 100,
       "imgUrl": "https://images.pexels.com/photos/2138922/pexels-photo-2138922.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
       "showInSlider": true
@@ -191,6 +191,14 @@
       "price": 777,
       "imgUrl": "https://images.pexels.com/photos/421759/pexels-photo-421759.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
       "showInSlider": false
+    },
+    {
+      "title": "rtuyrwurt",
+      "description": "trhft",
+      "price": "123",
+      "imgUrl": "https://images.pexels.com/photos/421759/pexels-photo-421759.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+      "showInSlider": false,
+      "id": 26
     }
   ]
 }
